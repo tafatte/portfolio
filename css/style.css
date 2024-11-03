@@ -925,3 +925,28 @@ a{
         padding: 1rem; 
     }
 }
+@media (max-width: 768px) {
+    .fenetre-graphisme, .fenetre-projets, .fenetre-logiciels {
+        width: 90%;   /* Réduit la largeur à 90% de l'écran */
+        height: auto; /* Ajuste la hauteur automatiquement */
+        max-width: 400px; /* Limite la largeur maximale */
+        padding: 1rem; /* Ajoute un padding si nécessaire */
+    }
+
+    .ruban-bleu {
+        height: 30px; /* Ajuste la hauteur du ruban pour mobile */
+    }
+
+    .icone-fermer, .icone-aide {
+        width: 25px; /* Ajuste la taille des icônes */
+        height: 25px; /* Ajuste la taille des icônes */
+    }
+
+    .icone-fermer {
+        margin-right: 10px; /* Espace entre les icônes */
+    }
+
+    .icone-aide {
+        margin-left: 10px; /* Espace entre les icônes */
+    }
+}
