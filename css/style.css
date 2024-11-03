@@ -903,3 +903,25 @@ a{
 .categories-perso:hover {
     background-size: 300%; /* Effet d'animation au survol */
 }
+@media (max-width: 768px) {
+    .fenetre-graphisme, .fenetre-projets, .fenetre-logiciels {
+        width: 90%;   /* Réduit la largeur à 90% de l'écran */
+        height: auto; /* Ajuste la hauteur automatiquement */
+        max-width: 400px; /* Limite la largeur maximale pour éviter que ce soit trop large */
+        padding: 1rem; /* Ajoute un padding si nécessaire */
+    }
+
+    .fenetre-profil {
+        width: 90%;  
+        height: auto; 
+        max-width: 400px; 
+        padding: 1rem; 
+    }
+
+    .fenetre-contact {
+        width: 90%;  
+        height: auto; 
+        max-width: 400px; 
+        padding: 1rem; 
+    }
+}
