@@ -135,12 +135,57 @@ $(document).ready(function() {
             location.reload();
         }
     });
-    $('.fenetre-projets').easyDrag({'handle': '.ruban-bleu'});
-    $('.fenetre-graphisme').easyDrag({'handle': '.ruban-bleu'});
-    $('.fenetre-contact').easyDrag({'handle': '.ruban-bleu-contact'});
-    $('.fenetre-logiciels').easyDrag({'handle': '.ruban-bleu'});
-    $('.fatal-error').easyDrag({'handle': '.ruban-bleu-error'});
-    $('.fenetre-profil').easyDrag({'handle': '.ruban-bleu'});
+    $(document).ready(function() {
+    function preventZIndexChange(selector) {
+        $(selector).on('mousedown', function() {
+            $(this).css('z-index', '10'); // Fixe le z-index à une valeur constante
+        });
+    }
+
+    function limitDrag(element) {
+        let startPosition = null;
+
+        $(element).easyDrag({
+            'handle': $(element).find('.ruban-bleu'),
+            onStart: function(event) {
+                // Verrouille le z-index au début du drag
+                $(this).css('z-index', '10');
+                startPosition = { top: $(this).position().top, left: $(this).position().left };
+            },
+            onDrag: function(event) {
+                const maxMovement = 40;
+                const newPosition = {
+                    top: startPosition.top + event.pageY - event.originalEvent.clientY,
+                    left: startPosition.left + event.pageX - event.originalEvent.clientX,
+                };
+
+                if (Math.abs(newPosition.top - startPosition.top) <= maxMovement) {
+                    $(this).css('top', newPosition.top + 'px');
+                } else {
+                    $(this).css('top', startPosition.top + (newPosition.top > startPosition.top ? maxMovement : -maxMovement) + 'px');
+                }
+
+                if (Math.abs(newPosition.left - startPosition.left) <= maxMovement) {
+                    $(this).css('left', newPosition.left + 'px');
+                } else {
+                    $(this).css('left', startPosition.left + (newPosition.left > startPosition.left ? maxMovement : -maxMovement) + 'px');
+                }
+            },
+            onStop: function(event) {
+                // Re-verrouille le z-index après le drag
+                $(this).css('z-index', '10');
+            }
+        });
+    }
+
+    // Appliquer le verrouillage du z-index et le drag limité à chaque élément
+    const elements = ['.fenetre-projets', '.fenetre-graphisme', '.fenetre-contact', '.fenetre-logiciels', '.fatal-error', '.fenetre-profil'];
+    elements.forEach(selector => {
+        preventZIndexChange(selector);
+        limitDrag(selector);
+    });
+});
+
 
 
     $('.cours-une').on("click", function() {
@@ -308,10 +353,17 @@ $(document).ready(function() {
     // Ajoute la classe 'categories-cours-li-clicked' à l'élément cliqué
         $(this).addClass("categories-perso-li-clicked");
     });
+    
+    $('.boutontv').on("click", function() {
+    if ($('.tvtexture').hasClass('tvoui')) {
+        $('.tvtexture').removeClass('tvoui');
+        $('.boutontv').html('OFF');
 
-
-
-   
+    } else {
+        $('.tvtexture').addClass('tvoui');
+        $('.boutontv').html('ON');
+    }
+    });
 });
 
 
